@@ -40,20 +40,19 @@ m2 = inv(K2)*h_pack(p2);
 
 % we will use the points m1(:,4) and m2(:,4) to estimate Pobj(4) by
 % triangulation in camera 1 reference frame
+marker_base = stereo_triangulation(T12, m1(:,4), m2(:,4));
 
-% express the direction vector reliying the center of the cameras and the
-% points in camera 1 frame
-origin1 = zeros(3, 1);
-dir1 = m1(:, 4);
-origin2 = t12;
-dir2 = R12*m2(:, 4);
+disp('The marker base position in camera 1 frame is')
+fprintf('\t%.1f\n', marker_base)
 
-% Solve the linear system for triangulation Ax = B
-A = [dir1 -dir2];
-B = origin2-origin1;
-x = A\B;
-
-% estimate point Pobj(4) with the first line equation
-Ori_obj1 = origin1 + x(1)*dir1;
-disp('The marker position in camera 1 frame is ')
-disp(Ori_obj1);
+%% Extra: Compute marker pose (with orientation)
+% use traingulation for at least other three points
+marker = [zeros(3, 3) marker_base];
+marker(:,1) = stereo_triangulation(T12, m1(:,1), m2(:,1));
+marker(:,2) = stereo_triangulation(T12, m1(:,1), m2(:,2));
+marker(:,3) = stereo_triangulation(T12, m1(:,2), m2(:,3));
+[T, R, t, error] = horn(marker, Pobj);
+disp('Pose estimation results:')
+disp(T)
+disp('Error:')
+disp(error)
