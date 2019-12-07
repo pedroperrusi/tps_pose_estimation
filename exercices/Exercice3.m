@@ -41,29 +41,3 @@ disp('Estimated transformation:')
 disp(T)
 disp('Reprojection error (mm; mm; mm):');
 disp(error);
-
-%  % Barycentric coordinates in sensor and object frames
-%  % gravity centers
-%  Og = mean_row(B);
-%  Cg = mean_row(P);
-%  Fc = P - broadcast(Cg, length(P)); % sum(Fc, 2) = 0
-%  Fo = B - broadcast(Og, length(B)); % sum(Fo, 2) = 0
-%
-%  % Optimal rotation (assume det > 0)
-%  M = Fc*Fo';
-%  [U, S, V] = svd(M);
-%  R = U*V';
-%  % Optimal translation
-%  t = Cg - R*Og;
-%  % 3D transformation
-%  T = [R t;
-%      zeros(1,3) 1];
-%  disp('Estimated transformation:')
-%  disp(T)
-%
-%  % Verification
-%  err = P - h_unpack(T*h_pack(B));
-% %  disp('Verification: P - T*B = ')
-% %  disp(err);
-%  disp('Reprojection error (mm; mm; mm):');
-%  disp(sqrt(mean(err.*err, 2)));
