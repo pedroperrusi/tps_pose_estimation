@@ -1,9 +1,6 @@
 %% Exercice 10
 clear all; close all;
-% handle functions
-h_pack = @(points) [points; ones(1, size(points, 2))]; % add homogeneous row
-h_unpack = @(h_points) h_points(1:3, :); % remove homogeneous row
-h_normalize = @(mat, dim) mat(1:dim,:)./repmat(mat(dim+1,:), dim, 1);
+
 % Matrice de projection intrinseque
 K = [1200 0 960;
      0  800 540;
@@ -20,7 +17,7 @@ disp('[uc; vc] = ')
 disp(K(1:2, 3));
 
 %% Calculez l'image de l'object
-Pim = h_normalize(h_unpack(K * T * h_pack(Pobj)), 2);
+Pim = h_normalize(K * T * h_pack(Pobj));
 disp('Image des points de lobjet');
 disp(Pim);
 

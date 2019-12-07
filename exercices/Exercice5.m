@@ -30,10 +30,6 @@ Tloc_p{3} = [0.6984 0.4493 -0.557  461.4;
              -0.4847 0.8696 0.0938 574.8;
              0.06266 0.2045 0.8252 1614.1;
              zeros(1, 3)            1];
-         
- % handy functions
- h_pack = @(points) [points; ones(1, size(points, 2))]; % add homogeneous row
- h_unpack = @(h_points) h_points(1:3, :); % remove homogeneous row
 %% Step 1: Points du support dans le repere du capteur
 Ps_loc = [];
 for i = 1:m

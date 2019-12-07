@@ -27,12 +27,6 @@ K = [2 0 0 0;
 iK = inv(K);
 
 %% Solution algebrique (Horn 87, pag 108)
-% handy functions
-h_pack = @(points) [points; ones(1, size(points, 2))]; % add homogeneous row
-h_unpack = @(h_points) h_points(1:3, :); % remove homogeneous row
-mean_row = @(mat) mean(mat, 2);
-broadcast = @(vec, N) repmat(vec, 1, N); % broadcast into cols
-
 % Convert image frame points to millimeter
 P = h_unpack(iK*h_pack(p)); % (mm,mm,mm)
 

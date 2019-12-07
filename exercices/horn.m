@@ -16,20 +16,18 @@ function [ T, R, t, reproj_error ] = horn( Pcam, Pobj )
 %   4. Extra: reprojection error
 
 %% Handy (anonymous) functions
-h_pack = @(points) [points; ones(1, size(points, 2))]; % add homogeneous row
-h_unpack = @(h_points) h_points(1:3, :); % remove homogeneous row
 broadcast = @(vec, N) repmat(vec, 1, N); % broadcast into cols
 
 %% Barycentric coordinates in sensor and object frames
 % gravity centers
 Cg = mean(Pcam, 2); % camera frame point barycenter
 Og = mean(Pobj, 2); % object frame point barycenter
-Fc = Pcam - broadcast(Cg, length(Pcam)); % sum(Fc, 2) = 0
-Fo = Pobj - broadcast(Og, length(Pobj)); % sum(Fo, 2) = 0
+Fc = Pcam - broadcast(Cg, size(Pcam, 2)); % sum(Fc, 2) = 0
+Fo = Pobj - broadcast(Og, size(Pobj, 2)); % sum(Fo, 2) = 0
 
 %% Optimal rotation (assume det > 0)
 M = Fc*Fo';
-[U, S, V] = svd(M);
+[U, ~, V] = svd(M);
 R = U*V';
 %% in case of reflection
 if det(R) < 0

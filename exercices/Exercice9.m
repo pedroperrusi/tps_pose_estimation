@@ -1,8 +1,5 @@
 %% Exercice 9
 clear all; close all;
-% handle functions
-h_pack = @(points) [points; ones(1, size(points, 2))]; % add homogeneous row
-h_normalize = @(mat, dim) mat(1:dim,:)./repmat(mat(dim+1,:), dim, 1);
 
 %% Input data
 % Object coordinates

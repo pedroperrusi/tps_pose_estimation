@@ -1,9 +1,6 @@
 %% Images ? projection perspective mmultiples 
 % Exercice 16
 clear all; close all;
-h_pack = @(points) [points; ones(1, size(points, 2))]; % add homogeneous row
-h_unpack = @(h_points, dim) h_points(1:dim, :); % remove homogeneous row
-h_normalize = @(mat, dim) mat(1:dim,:)./repmat(mat(dim+1,:), dim, 1);
 
 %% Problem description
 % Localization system based in two cameras
