@@ -25,7 +25,6 @@ disp('Image des points de lobjet');
 disp(Pim);
 
 %% Distance between points
-D12 = Pim(:, 1) - Pim(:, 2);
-D12 = sqrt(D12'* D12);
+D12 = norm(Pim(:, 1) - Pim(:, 2));
 disp('Distance between 1 and 2')
 disp(D12)
