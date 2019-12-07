@@ -31,10 +31,15 @@ disp('Computed inverse intrinsics matrix:')
 disp(iK)
 
 %% Compute perspective projection
-m = h_normalize(iK*h_pack(Pim), 2);
+m = iK*h_pack(Pim);
 
 %% Compute quadratic equation values for each pair of points
 qeq_distances(m, Pobj);
 
 %% Some sistances between object points and the camera frame are given
 D = [402.5 379.7 409.4 446.2];
+% Given one point m(:,i) and its distance to the optique center we can find
+% the object position
+position = D(1) * m(:,1)/norm(m(:,1));
+disp('Object position is')
+disp(position)
