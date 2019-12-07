@@ -1,6 +1,11 @@
-function [ p_obj1, p_obj2 ] = stereo_triangulation( T12, pt1, pt2 )
-%STEREO_TRIANGULATION Summary of this function goes here
-%   Detailed explanation goes here
+function [ pobj1, pobj2 ] = stereo_triangulation( T12, pt1, pt2 )
+%STEREO_TRIANGULATION Obtain a physical point coordinate given a pair of
+%points in metric coordinates and their extrinsic matrix
+%   T12: Extrinsic transformation between cameras 1 and 2
+%   pt1: 3xN point in metric coordinates expressed in camera 1 frame
+%   pt1: 3xN point in metric coordinates expressed in camera 2 frame
+%   pobj1: 3xN Output physical point coordinate in camera 1 frame
+%   pobj2: 3xN Output physical point coordinate in camera 2 frame
 n = size(pt1, 2);
 R12 = T12(1:3, 1:3);
 t12 = T12(1:3, 4);
@@ -15,7 +20,7 @@ dir2 = R12*pt2;
 A = [dir1 -dir2];
 B = origin2-origin1;
 x = A\B; % inv(A)*B
-p_obj1 = origin1 + x(1)*dir1;
-p_obj2 = T12*[p_obj1; 1];
+pobj1 = origin1 + x(1)*dir1;
+pobj2 = T12*[pobj1; 1];
 end
 
