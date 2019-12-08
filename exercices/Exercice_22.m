@@ -1,4 +1,4 @@
-%% Exercice 22
+%% Exercice 22: Perspective projection of marker
 clear all; close all;
 %% Marker geometry
 % first exremity
