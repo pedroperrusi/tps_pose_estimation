@@ -4,7 +4,7 @@ function [ sq_dist_P, proj_m ] = qeq_distances( Pcam, Pobj )
 % Pobj: 3XN Points in object coordinate frame (mm/mm/mm)
 norm_dot = @(v1, v2) v1'*v2/(norm(v1)*norm(v2));
 n = size(Pcam, 2);
-n_pairs = factorial(n)/(factorial(n-2)*factorial(2));
+n_pairs = n*(n-1)/2; % combination of n elements, 2 by 2
 proj_m = zeros(n_pairs, 1);
 sq_dist_P = zeros(n_pairs, 1);
 idx = 1; % output idx (1:n_combinations)
