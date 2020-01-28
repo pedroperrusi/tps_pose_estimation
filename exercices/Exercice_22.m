@@ -18,15 +18,16 @@ T = [0.4330  0.5537  0.7113  -24.5;
 p = [239   315 305   340;
      300.5 237 337.5 251.5];
 n = size(p, 2);
+
 %% Intrinsics matrix by DICOM parameters
 PixelSpacing = [0.5; 0.5];
 ImageDimensions = [512; 512];
 % Agrandissements sont l'inverse du pixel spacing
 alpha = PixelSpacing.^(-1);
+% on suppose image au centre du capteur
 uc = ImageDimensions(1)/2;
 vc = ImageDimensions(2)/2;
-% on suppose image au centre du capteur
-uc = 512/2; vc = 512/2;
+% Assemble K
 K = [alpha(1) 0      uc;
      0      alpha(2) vc;
      0        0      1];

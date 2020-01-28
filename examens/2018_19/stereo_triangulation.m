@@ -20,6 +20,6 @@ A = [dir1 -dir2];
 B = origin2-origin1;
 x = A\B; % inv(A)*B
 pobj1 = origin1 + x(1)*dir1;
-pobj2 = T12*[pobj1; 1];
+pobj2 = h_unpack(T12*[pobj1; 1]);
 end
 
